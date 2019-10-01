@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_fournisseurs">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.recyclertp.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_fournisseurs"
+        android:name="com.example.recyclertp.ui.fournisseurs.FournisseursFragment"
+        android:label="@string/menu_fournisseurs"
+        tools:layout="@layout/fragment_fournisseurs" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.recyclertp.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_produits"
+        android:name="com.example.recyclertp.ui.produits.ProduitsFragment"
+        android:label="@string/menu_produits"
+        tools:layout="@layout/fragment_produits" />
 
 </navigation>
