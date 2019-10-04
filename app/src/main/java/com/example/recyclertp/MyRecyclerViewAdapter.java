@@ -9,16 +9,19 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
-    private List<String> mData;
+    private List<JSONObject> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public MyRecyclerViewAdapter(Context context, List<String> data) {
+    public MyRecyclerViewAdapter(Context context, List<JSONObject> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -33,8 +36,16 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String element = mData.get(position);
-        holder.tvName.setText(element);
+        try {
+            JSONObject element = mData.get(position);
+            holder.tvName.setText(element.getString("name"));
+            holder.tvTel.setText(element.getString("telephone"));
+            holder.tvAdresse.setText(element.getString("address_line_1"));
+            holder.tvContact.setText(element.getString("contact"));
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     // total number of rows
@@ -67,9 +78,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     // convenience method for getting data at click position
-    public String getItem(int id) {
+   /* public String getItem(int id) {
         return mData.get(id);
-    }
+    }*/
 
     // allows clicks events to be caught
     void setClickListener(ItemClickListener itemClickListener) {

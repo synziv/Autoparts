@@ -84,13 +84,13 @@ public class FournisseursFragment extends Fragment implements MyRecyclerViewAdap
                         try {
                             JSONArray jsonArray= response.getJSONArray(type);
                             //ladapater prendre slm un array list donc il faut transposer
-                            ArrayList<String> data = new ArrayList<>();
+                            ArrayList<JSONObject> data = new ArrayList<JSONObject>();
                             //boucle pour mettre la donnes dans un array list
                             for(int i=0;i<jsonArray.length();i++)
                             {
                                 JSONObject produit = jsonArray.getJSONObject(i);
                                 String name = produit.getString("name");
-                                data.add(name);
+                                data.add(produit);
                             }
                             //test poour set up le recyclerview
                             RecyclerView recyclerView = getActivity().findViewById(R.id.rv_Suppliers);
