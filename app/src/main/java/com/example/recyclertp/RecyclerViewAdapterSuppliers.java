@@ -40,8 +40,9 @@ public class RecyclerViewAdapterSuppliers extends RecyclerView.Adapter<RecyclerV
             JSONObject element = mData.get(position);
             holder.tvName.setText(element.getString("name"));
             holder.tvTel.setText(element.getString("telephone"));
-            holder.tvAdresse.setText(element.getString("address_line_1"));
             holder.tvContact.setText(element.getString("contact"));
+            holder.tvAdresse.setText(element.getString("address_line_1"));
+
         }
         catch (JSONException e) {
             e.printStackTrace();

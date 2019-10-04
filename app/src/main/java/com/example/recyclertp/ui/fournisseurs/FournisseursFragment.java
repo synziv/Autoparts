@@ -44,13 +44,13 @@ public class FournisseursFragment extends Fragment implements RecyclerViewAdapte
         fournisseursViewModel =
                 ViewModelProviders.of(this).get(FournisseursViewModel.class);
         View root = inflater.inflate(R.layout.fragment_fournisseurs, container, false);
-        textView= root.findViewById(R.id.text_home);
+        /*textView= root.findViewById(R.id.text_home);
         fournisseursViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 //textView.setText(s);
             }
-        });
+        });*/
 
         //https://stackoverflow.com/questions/17037340/converting-jsonarray-to-arraylist
         requeteRetourArrayList("suppliers");
