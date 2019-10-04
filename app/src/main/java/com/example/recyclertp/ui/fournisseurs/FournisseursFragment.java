@@ -71,7 +71,7 @@ public class FournisseursFragment extends Fragment implements MyRecyclerViewAdap
     {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        String url ="https://api.myjson.com/bins/191ve7";
+        String url ="https://api.myjson.com/bins/wewjb";
 
 
         // Request a string response from the provided URL.
@@ -88,8 +88,9 @@ public class FournisseursFragment extends Fragment implements MyRecyclerViewAdap
                             //boucle pour mettre la donnes dans un array list
                             for(int i=0;i<jsonArray.length();i++)
                             {
-                                JSONObject obj = jsonArray.getJSONObject(i);
-                                data.add(obj.toString());
+                                JSONObject produit = jsonArray.getJSONObject(i);
+                                String name = produit.getString("name");
+                                data.add(name);
                             }
                             //test poour set up le recyclerview
                             RecyclerView recyclerView = getActivity().findViewById(R.id.rv_Suppliers);

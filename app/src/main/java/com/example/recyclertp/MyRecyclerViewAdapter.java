@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.recyclertp.ui.fournisseurs.FournisseursFragment;
 
 import java.util.List;
 
@@ -34,8 +33,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String animal = mData.get(position);
-        holder.myTextView.setText(animal);
+        String element = mData.get(position);
+        holder.tvName.setText(element);
     }
 
     // total number of rows
@@ -47,11 +46,17 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView;
+        TextView tvName;
+        TextView tvAdresse;
+        TextView tvTel;
+        TextView tvContact;
 
         ViewHolder(View itemView) {
             super(itemView);
-            myTextView = itemView.findViewById(R.id.tvTitle);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvAdresse = itemView.findViewById(R.id.tvAdresse);
+            tvTel = itemView.findViewById(R.id.tvTel);
+            tvContact = itemView.findViewById(R.id.tvContact);
             itemView.setOnClickListener(this);
         }
 
