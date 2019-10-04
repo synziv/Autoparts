@@ -1,13 +1,10 @@
 package com.example.recyclertp.ui.fournisseurs;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -18,8 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.android.volley.Cache;
-import com.android.volley.Network;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -27,7 +22,7 @@ import com.android.volley.VolleyError;
 
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.recyclertp.MyRecyclerViewAdapter;
+import com.example.recyclertp.RecyclerViewAdapterSuppliers;
 import com.example.recyclertp.R;
 
 import org.json.JSONArray;
@@ -36,9 +31,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class FournisseursFragment extends Fragment implements MyRecyclerViewAdapter.ItemClickListener{
+public class FournisseursFragment extends Fragment implements RecyclerViewAdapterSuppliers.ItemClickListener{
     //variable pour le recycler
-    private MyRecyclerViewAdapter adapter;
+    private RecyclerViewAdapterSuppliers adapter;
 
     private FournisseursViewModel fournisseursViewModel;
     private TextView textView;
@@ -59,10 +54,6 @@ public class FournisseursFragment extends Fragment implements MyRecyclerViewAdap
 
         //https://stackoverflow.com/questions/17037340/converting-jsonarray-to-arraylist
         requeteRetourArrayList("suppliers");
-
-
-
-
 
         return root;
     }
@@ -89,13 +80,12 @@ public class FournisseursFragment extends Fragment implements MyRecyclerViewAdap
                             for(int i=0;i<jsonArray.length();i++)
                             {
                                 JSONObject produit = jsonArray.getJSONObject(i);
-                                String name = produit.getString("name");
                                 data.add(produit);
                             }
                             //test poour set up le recyclerview
                             RecyclerView recyclerView = getActivity().findViewById(R.id.rv_Suppliers);
                             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            adapter = new MyRecyclerViewAdapter(getActivity()
+                            adapter = new RecyclerViewAdapterSuppliers(getActivity()
                                     , data);
                             //adapter.setClickListener(this);
                             recyclerView.setAdapter(adapter);
