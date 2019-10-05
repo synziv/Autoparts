@@ -16,5 +16,10 @@
         android:name="com.example.recyclertp.ui.produits.ProduitsFragment"
         android:label="@string/menu_produits"
         tools:layout="@layout/fragment_produits" />
+    <fragment
+        android:id="@+id/nav_produit_details"
+        android:name="com.example.recyclertp.ui.produits.ProduitsFragment"
+        android:label="@string/menu_produits"
+        tools:layout="@layout/fragment_produit_details" />
 
 </navigation>

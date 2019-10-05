@@ -5,12 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ProduitsFragment extends Fragment implements RecyclerViewAdapterProducts.ItemClickListener{
+public class ProduitsFragment extends Fragment /*implements RecyclerViewAdapterProducts.ItemClickListener*/{
 
     private ProduitsViewModel produitsViewModel;
     private RecyclerViewAdapterProducts adapter;
@@ -81,7 +83,18 @@ public class ProduitsFragment extends Fragment implements RecyclerViewAdapterPro
                             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                             adapter = new RecyclerViewAdapterProducts(getActivity()
                                     , data);
-                            //adapter.setClickListener(this);
+                            adapter.setOnClickListener(new RecyclerViewAdapterProducts.ItemClickListener() {
+                                @Override
+                                public void onItemClick(View view, int position) {
+                                    int x =position;
+                                    //creation de la vue pour les details du produit
+                                    View detailsView = getActivity().findViewById(R.id.nav_produit_details);
+                                    TextView titleD =detailsView.findViewById(R.id.tvTitleD);
+                                    titleD.setText("aaaa");
+
+                                    Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_LONG).show();
+                                }
+                            });
                             recyclerView.setAdapter(adapter);
 
                         }
@@ -104,8 +117,9 @@ public class ProduitsFragment extends Fragment implements RecyclerViewAdapterPro
     }
 
 
-    @Override
+    /*Override
     public void onItemClick(View view, int position) {
         //Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-    }
+        Toast.makeText(getActivity(), position, Toast.LENGTH_LONG).show();
+    }*/
 }

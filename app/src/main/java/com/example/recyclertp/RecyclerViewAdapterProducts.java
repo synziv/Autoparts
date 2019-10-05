@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +30,7 @@ public class RecyclerViewAdapterProducts extends RecyclerView.Adapter<RecyclerVi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recyclerview_row_products, parent, false);
+
         return new ViewHolder(view);
     }
 
@@ -69,17 +71,20 @@ public class RecyclerViewAdapterProducts extends RecyclerView.Adapter<RecyclerVi
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (mClickListener != null)
+            {
+                mClickListener.onItemClick(view, getAdapterPosition());
+            }
         }
     }
 
     // convenience method for getting data at click position
-   /* public String getItem(int id) {
+    public JSONObject getItem(int id) {
         return mData.get(id);
-    }*/
+    }
 
     // allows clicks events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
+    public void setOnClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
