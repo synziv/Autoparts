@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.recyclertp.ui.fournisseurs.Fournisseur;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,12 +18,12 @@ import java.util.List;
 
 public class RecyclerViewAdapterSuppliers extends RecyclerView.Adapter<RecyclerViewAdapterSuppliers.ViewHolder> {
 
-    private List<JSONObject> mData;
+    private List<Fournisseur> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public RecyclerViewAdapterSuppliers(Context context, List<JSONObject> data) {
+    public RecyclerViewAdapterSuppliers(Context context, List<Fournisseur> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -36,17 +38,12 @@ public class RecyclerViewAdapterSuppliers extends RecyclerView.Adapter<RecyclerV
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        try {
-            JSONObject element = mData.get(position);
-            holder.tvName.setText(element.getString("name"));
-            holder.tvTel.setText(element.getString("telephone"));
-            holder.tvContact.setText(element.getString("contact"));
-            holder.tvAdresse.setText(element.getString("address_line_1"));
+            Fournisseur f = mData.get(position);
+            holder.tvName.setText(f.getName());
+            holder.tvTel.setText(f.getTel());
+            holder.tvContact.setText(f.getContact());
+            holder.tvAdresse.setText(f.getAd1());
 
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
     // total number of rows
@@ -78,13 +75,8 @@ public class RecyclerViewAdapterSuppliers extends RecyclerView.Adapter<RecyclerV
         }
     }
 
-    // convenience method for getting data at click position
-   /* public String getItem(int id) {
-        return mData.get(id);
-    }*/
-
     // allows clicks events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
+    public void setOnClickListener(RecyclerViewAdapterSuppliers.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 

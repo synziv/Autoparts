@@ -9,7 +9,16 @@
         android:id="@+id/nav_fournisseurs"
         android:name="com.example.recyclertp.ui.fournisseurs.FournisseursFragment"
         android:label="@string/menu_fournisseurs"
-        tools:layout="@layout/fragment_fournisseurs" />
+        tools:layout="@layout/fragment_fournisseurs" >
+        <action
+            android:id="@+id/action_nav_fournisseurs_to_nav_fournisseurs_details"
+            app:destination="@id/nav_fournisseurs_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_fournisseurs_details"
+        android:name="com.example.recyclertp.ui.fournisseurs.FournisseurDetailsFragment"
+        android:label="@string/menu_fournisseurs"
+        tools:layout="@layout/fragment_fournisseur_details" />
 
     <fragment
         android:id="@+id/nav_produits"
@@ -22,13 +31,9 @@
     </fragment>
     <fragment
         android:id="@+id/nav_produit_details"
-        android:name="com.example.recyclertp.ui.ProduitDetailsFragment"
+        android:name="com.example.recyclertp.ui.produits.ProduitDetailsFragment"
         android:label="@string/menu_produits"
         tools:layout="@layout/fragment_produit_details" >
-        <argument
-            android:name="myArg"
-            app:argType="string"
-            android:defaultValue='"default"' />
     </fragment>
 
 </navigation>

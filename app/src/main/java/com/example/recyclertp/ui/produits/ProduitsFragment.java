@@ -20,7 +20,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.recyclertp.R;
 import com.example.recyclertp.RecyclerViewAdapterProducts;
-import com.example.recyclertp.ui.ProduitDetailsFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -92,7 +91,6 @@ public class ProduitsFragment extends Fragment /*implements RecyclerViewAdapterP
                                 //affiche les detials du produits en clicquant dessus
                                 @Override
                                 public void onItemClick(View view, int position) {
-                                    ProduitDetailsFragment p = new ProduitDetailsFragment();
                                     Bundle bundle=new Bundle();
                                     bundle.putParcelable("produit", data.get(position));
                                     Navigation.findNavController(view).navigate(R.id.nav_produit_details, bundle);

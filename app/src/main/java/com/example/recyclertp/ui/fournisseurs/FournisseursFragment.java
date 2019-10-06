@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,7 @@ import com.android.volley.VolleyError;
 
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.recyclertp.RecyclerViewAdapterProducts;
 import com.example.recyclertp.RecyclerViewAdapterSuppliers;
 import com.example.recyclertp.R;
 
@@ -63,7 +65,7 @@ public class FournisseursFragment extends Fragment implements RecyclerViewAdapte
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         String url ="https://api.myjson.com/bins/wewjb";
-
+        final ArrayList<Fournisseur> data = new ArrayList<Fournisseur>();
 
         // Request a string response from the provided URL.
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
@@ -75,19 +77,39 @@ public class FournisseursFragment extends Fragment implements RecyclerViewAdapte
                         try {
                             JSONArray jsonArray= response.getJSONArray(type);
                             //ladapater prendre slm un array list donc il faut transposer
-                            ArrayList<JSONObject> data = new ArrayList<JSONObject>();
+
                             //boucle pour mettre la donnes dans un array list
                             for(int i=0;i<jsonArray.length();i++)
                             {
-                                JSONObject produit = jsonArray.getJSONObject(i);
-                                data.add(produit);
+                                JSONObject fournisseurJson = jsonArray.getJSONObject(i);
+                                Fournisseur fournisseur = new Fournisseur(
+                                        fournisseurJson.getInt("id"),
+                                        fournisseurJson.getString("name"),
+                                        fournisseurJson.getString("address_line_1"),
+                                        fournisseurJson.getString("address_line_2"),
+                                        fournisseurJson.getString("address_city"),
+                                        fournisseurJson.getString("address_province"),
+                                        fournisseurJson.getString("address_postal_code"),
+                                        fournisseurJson.getString("telephone"),
+                                        fournisseurJson.getString("contact"));
+                                data.add(fournisseur);
                             }
-                            //test poour set up le recyclerview
+                            //creer le recyclerview
                             RecyclerView recyclerView = getActivity().findViewById(R.id.rv_Suppliers);
                             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                             adapter = new RecyclerViewAdapterSuppliers(getActivity()
                                     , data);
-                            //adapter.setClickListener(this);
+
+                            //set up le click listener
+                            adapter.setOnClickListener(new RecyclerViewAdapterSuppliers.ItemClickListener() {
+                                //affiche les detials du produits en clicquant dessus
+                                @Override
+                                public void onItemClick(View view, int position) {
+                                    Bundle bundle=new Bundle();
+                                    bundle.putParcelable("fournisseur", data.get(position));
+                                    Navigation.findNavController(view).navigate(R.id.nav_fournisseurs_details, bundle);
+                                }
+                            });
                             recyclerView.setAdapter(adapter);
 
                         }
