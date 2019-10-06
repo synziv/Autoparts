@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recyclertp.ui.produits.Produit;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,12 +18,12 @@ import java.util.List;
 
 public class RecyclerViewAdapterProducts extends RecyclerView.Adapter<RecyclerViewAdapterProducts.ViewHolder> {
 
-    private List<JSONObject> mData;
+    private List<Produit> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public RecyclerViewAdapterProducts(Context context, List<JSONObject> data) {
+    public RecyclerViewAdapterProducts(Context context, List<Produit> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -37,15 +39,10 @@ public class RecyclerViewAdapterProducts extends RecyclerView.Adapter<RecyclerVi
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        try {
-            JSONObject element = mData.get(position);
-            holder.tvTitle.setText(element.getString("title"));
-            holder.tvPrice.setText(element.getString("unitPrice"));
-            holder.tvInventory.setText(element.getString("inventory"));
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
+            Produit p = mData.get(position);
+            holder.tvTitle.setText(p.getTitle());
+            holder.tvPrice.setText(Double.toString(p.getUnitPrice()));
+            holder.tvInventory.setText(Integer.toString(p.getInventory()));
     }
 
     // total number of rows
@@ -78,10 +75,6 @@ public class RecyclerViewAdapterProducts extends RecyclerView.Adapter<RecyclerVi
         }
     }
 
-    // convenience method for getting data at click position
-    public JSONObject getItem(int id) {
-        return mData.get(id);
-    }
 
     // allows clicks events to be caught
     public void setOnClickListener(ItemClickListener itemClickListener) {
