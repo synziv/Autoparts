@@ -15,10 +15,14 @@
         android:id="@+id/nav_produits"
         android:name="com.example.recyclertp.ui.produits.ProduitsFragment"
         android:label="@string/menu_produits"
-        tools:layout="@layout/fragment_produits" />
+        tools:layout="@layout/fragment_produits" >
+        <action
+            android:id="@+id/action_nav_produits_to_nav_produit_details"
+            app:destination="@id/nav_produit_details" />
+    </fragment>
     <fragment
         android:id="@+id/nav_produit_details"
-        android:name="com.example.recyclertp.ui.produits.ProduitsFragment"
+        android:name="com.example.recyclertp.ui.ProduitDetailsFragment"
         android:label="@string/menu_produits"
         tools:layout="@layout/fragment_produit_details" />
 
